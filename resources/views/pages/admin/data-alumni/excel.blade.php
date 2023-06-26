@@ -76,7 +76,7 @@
                 </tr>
                 @empty
                 <tr class="text-center">
-                    <td colspan="12"> -- Data Kosong --</td>
+                    <td colspan="13" style="vertical-align : middle; text-align:center;"> -- Data Kosong --</td>
                 </tr>
                 @endforelse
             </tbody>

@@ -57,7 +57,7 @@
             </tr>
             @empty
             <tr class="text-center">
-                <td colspan="7">-- Data Kosong --</td>
+                <td colspan="7" style="vertical-align : middle; text-align:center;">-- Data Kosong --</td>
             </tr>
             @endforelse
         </tbody>

@@ -3,7 +3,10 @@
 @section('title', 'Data Alumni')
 
 @section('content')
-<a href="{{ route('data-alumni.index') }}" class="btn btn-sm btn-info mb-3">Kembali</a>
+<div class="d-flex justify-content-between">
+    <a href="{{ route('data-alumni.index') }}" class="btn btn-sm btn-info mb-3">Kembali</a>
+    <a href="{{ route('data-alumni.tracer-pdf', $item->nisn) }}" class="btn btn-sm btn-primary mb-3" target="_blank">Download Data</a>
+</div>
 @if ($item->hapalan)
 <div class="row mb-3">
     <div class="col-sm-12">

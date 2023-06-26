@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\AlumniExport;
+use App\Exports\AlumniTahunExport;
 use App\Exports\HapalanExport;
 use App\Exports\PekerjaanExport;
 use App\Exports\PerguruanTinggiExport;
@@ -248,5 +249,29 @@ class DataAlumniController extends Controller
     public function printHapalan2()
     {
         return Excel::download(new HapalanExport, 'hapalan.xlsx');
+    }
+
+    public function tracer_pdf($id)
+    {
+        $item = Alumni::findOrFail($id);
+        $items = Hapalan::where('nisn', $id)->get('hapalan.*');
+        $items2 = PrestasiAkademik::where('nisn', $id)->orderByRaw("FIELD(tingkat , 'Kabupaten', 'Provinsi', 'Nasional', 'Internasional') ASC")->get();
+        $items3 = PrestasiNonAkademik::where('nisn', $id)->orderByRaw("FIELD(tingkat , 'Kabupaten', 'Provinsi', 'Nasional', 'Internasional') ASC")->get();
+        $items4 = PerguruanTinggi::where('nisn', $id)->orderBy('tahun_masuk', 'ASC')->get();
+        $items5 = Pekerjaan::where('nisn', $id)->orderBy('nama_pekerjaan', 'ASC')->get();
+
+        return view('pages.admin.data-alumni.tracer', compact('items', 'items2', 'items3', 'items4', 'items5', 'item'));
+    }
+
+    public function cetak_alumni_tahun_excel(Request $request)
+    {
+        return Excel::download(new AlumniTahunExport($request->tahun), 'alumni-' . $request->tahun . '.xlsx');
+    }
+
+    public function cetak_alumni_tahun_pdf(Request $request)
+    {
+        $items = Alumni::join('users as user', 'user.id', 'alumni.user_id')->orderBy('user.nama', 'ASC')->where('alumni.tahun_lulus', $request->tahun)->get();
+
+        return view('pages.admin.data-alumni.pdf', compact('items'));
     }
 }

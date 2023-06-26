@@ -29,10 +29,20 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="text-center">
-                                            <h5 class="text-dark">Print Data atau Download Excel</h5>
-                                            <a href="{{ route('data-alumni.print') }}" class="btn btn-danger mr-2" target="_blank">Print Data</a>
+                                            <h5 class="text-dark">Cetak Semua Data Alumni</h5>
+                                            <a href="{{ route('data-alumni.print') }}" class="btn btn-danger mr-2" target="_blank">Download PDF</a>
                                             <a href="{{ route('data-alumni.print-2') }}" class="btn btn-success" target="_blank">Download
                                                 Excel</a>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <h5 class="text-dark">Cetak Data Alumni per Tahun</h5>
+                                            <form method="GET" id="form-alumni-tahun" target="_blank">
+                                                <div class="form-group d-flex justify-content-center" style="margin-bottom: 0px">
+                                                    <input type="number" class="form-control w-50" placeholder="Masukkan Tahun" value="{{ old('tahun') }}" name="tahun">
+                                                </div>
+                                                <button id="tahun-pdf" type="button" class="btn btn-danger mt-2 mr-2">Download PDF</button>
+                                                <button id="tahun-excel" type="button" class="btn btn-success mt-2">Download Excel</button>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -292,6 +302,15 @@
             "orderable": false
         });
     });
-
+</script>
+<script>
+    $("#tahun-excel").on("click", function(e) {
+        e.preventDefault();
+        $('#form-alumni-tahun').attr('action', "{{ route('data-alumni.alumni-tahun-excel') }}").submit();
+    });
+    $("#tahun-pdf").on("click", function(e) {
+        e.preventDefault();
+        $('#form-alumni-tahun').attr('action', "{{ route('data-alumni.alumni-tahun-pdf') }}").submit();
+    });
 </script>
 @endpush

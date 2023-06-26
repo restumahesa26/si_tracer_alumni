@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/tracer-alumni/prestasi-non-akademik', [HomeController::class, 'prestasi_non_akademik'])->name('home.prestasi-non-akademik')->middleware('role:Alumni');
     Route::get('/tracer-alumni/perguruan-tinggi', [HomeController::class, 'perguruan_tinggi'])->name('home.perguruan-tinggi')->middleware('role:Alumni');
     Route::get('/tracer-alumni/pekerjaan', [HomeController::class, 'pekerjaan'])->name('home.pekerjaan')->middleware('role:Alumni');
+    Route::get('/data-alumni/download-per-tahun-pdf', [DataAlumniController::class, 'cetak_alumni_tahun_pdf'])->name('data-alumni.alumni-tahun-pdf')->middleware('role:Admin');
+    Route::get('/data-alumni/download-per-tahun-excel', [DataAlumniController::class, 'cetak_alumni_tahun_excel'])->name('data-alumni.alumni-tahun-excel')->middleware('role:Admin');
+    Route::get('/data-alumni/{id}/download-data-tracer-pdf', [DataAlumniController::class, 'tracer_pdf'])->name('data-alumni.tracer-pdf')->middleware('role:Admin');
     Route::get('/data-alumni/download-data-alumni-pdf', [DataAlumniController::class, 'print'])->name('data-alumni.print')->middleware('role:Admin');
     Route::get('/data-alumni/download-data-alumni-excel', [DataAlumniController::class, 'print2'])->name('data-alumni.print-2')->middleware('role:Admin');
     Route::get('/data-alumni/download-prestasi-akademik-pdf', [DataAlumniController::class, 'printAkademik'])->name('data-alumni.print-akademik')->middleware('role:Admin');

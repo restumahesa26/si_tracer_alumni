@@ -89,7 +89,7 @@
             </tr>
             @empty
             <tr class="text-center">
-                <td colspan="23">-- Data Kosong --</td>
+                <td colspan="23" style="vertical-align : middle; text-align:center;">-- Data Kosong --</td>
             </tr>
             @endforelse
         </tbody>
